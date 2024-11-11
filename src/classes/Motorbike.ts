@@ -1,26 +1,49 @@
-// Importing Vehicle and Wheel classes
-import Vehicle from './Vehicle.js';
-import Wheel from './Wheel.js';
+// Import the necessary classes
+import Truck from "./Truck.js";
+import Motorbike from "./Motorbike.js";
+import Car from "./Car.js";
+import Wheel from "./Wheel.js";
 
-// TODO: The Motorbike class should extend the Vehicle class
-class Motorbike {
-  // TODO: Declare properties of the Motorbike class
-  // TODO: The properties should include vin, color, make, model, year, weight, top speed, and wheels
-  // TODO: The types should be as follows: vin (string), color (string), make (string), model (string), year (number), weight (number), topSpeed (number), wheels (Wheel[])
+// Create a new Truck
+const myTruck = new Truck(
+	"1A2B3C4D5E6F",
+	"Red",
+	"Ford",
+	"F-150",
+	2024,
+	5000,
+	120,
+	[new Wheel(18), new Wheel(18), new Wheel(18), new Wheel(18)],
+	8000
+);
 
-  // TODO: Create a constructor that accepts the properties of the Motorbike class
-    // TODO: The constructor should call the constructor of the parent class, Vehicle
-    // TODO: The constructor should initialize the properties of the Motorbike class
-    // TODO: The constructor should check if the wheels array has 2 elements and create 2 new default Wheel objects if it does not
+// Create a Motorbike and a Car
+const myMotorbike = new Motorbike(
+	"2X3Y4Z5A6B7C",
+	"Blue",
+	"Yamaha",
+	"YZF-R3",
+	2022,
+	350,
+	180,
+	[new Wheel(15), new Wheel(15)],
+	300
+);
+const myCar = new Car(
+	"3Y4Z5A6B7C8D",
+	"Black",
+	"Toyota",
+	"Corolla",
+	2023,
+	1500,
+	180,
+	[new Wheel(16), new Wheel(16), new Wheel(16), new Wheel(16)],
+	1000
+);
 
-  // TODO: Implement the wheelie method
-    // TODO: The method should log the message "Motorbike [make] [model] is doing a wheelie!"
+// Test towing functionality
+myTruck.tow(myMotorbike); // This should be towed because the weight is within the capacity
+myTruck.tow(myCar); // This should not be towed because the weight exceeds the towing capacity
 
-  // TODO: Override the printDetails method from the Vehicle class
-  // TODO: The method should call the printDetails method of the parent class
-  // TODO: The method should log the details of the Motorbike
-  // TODO: The details should include the VIN, make, model, year, weight, top speed, color, and wheels
-}
-
-// Export the Motorbike class as the default export
-export default Motorbike;
+// Print truck details
+myTruck.printDetails();

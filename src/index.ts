@@ -1,41 +1,56 @@
-// import classes
-import Truck from "./classes/Truck.js";
-import Car from "./classes/Car.js";
-import Motorbike from "./classes/Motorbike.js";
-import Wheel from "./classes/Wheel.js";
-import Cli from "./classes/Cli.js";
+// Importing the Vehicle and Wheel classes
+import Vehicle from "./Vehicle.js";
+import Wheel from "./Wheel.js";
 
-// create an array of vehicles
-const vehicles = [];
+class Motorbike extends Vehicle {
+	// Declare properties of the Motorbike class
+	vin: string;
+	color: string;
+	make: string;
+	model: string;
+	year: number;
+	weight: number;
+	topSpeed: number;
+	wheels: Wheel[];
 
-// TODO: uncomment once trucks are implemented
-// const truck1 = new Truck(Cli.generateVin(),"red", "Ford", "F-150", 2021, 5000, 120, [], 10000);
+	// Constructor that accepts the properties of the Motorbike class
+	constructor(
+		vin: string,
+		color: string,
+		make: string,
+		model: string,
+		year: number,
+		weight: number,
+		topSpeed: number,
+		wheels: Wheel[]
+	) {
+		// Call the parent class constructor (Vehicle)
+		super(vin, color, make, model, year, weight, topSpeed, wheels);
 
-// will use default wheels
-const car1 = new Car(
-  Cli.generateVin(),
-  'blue',
-  'Toyota',
-  'Camry',
-  2021,
-  3000,
-  130,
-  []
-);
+		// Ensure there are exactly 2 wheels, create new Wheel objects if necessary
+		if (wheels.length !== 2) {
+			this.wheels = [new Wheel(17), new Wheel(17)]; // Default wheels with diameter 17
+		}
+	}
 
-// TODO: uncomment once motorbikes are implemented
-// const motorbike1Wheels = [new Wheel(17, "Michelin"), new Wheel(17, "Michelin")];
-// const motorbike1 = new Motorbike(Cli.generateVin(), "black", "Harley Davidson", "Sportster", 2021, 500, 125, motorbike1Wheels);
+	// Implement the wheelie method
+	wheelie(): void {
+		console.log(`${this.make} ${this.model} is doing a wheelie!`);
+	}
 
-// push vehicles to array
-// TODO: uncomment once trucks are implemented
-// vehicles.push(truck1);
-vehicles.push(car1);
-// TODO: uncomment once motorbikes are implemented
-// vehicles.push(motorbike1);
+	// Override the printDetails method from the Vehicle class
+	printDetails(): void {
+		// Call the parent class's printDetails method to log common vehicle details
+		super.printDetails();
 
-// create a new instance of the Cli class
-const cli = new Cli(vehicles);
+		// Log the motorbike-specific details
+		console.log(
+			`Wheels: ${this.wheels
+				.map((wheel) => `Diameter: ${wheel.diameter}`)
+				.join(", ")}`
+		);
+	}
+}
 
-// start the cli
-cli.startCli();
+// Export the Motorbike class as the default export
+export default Motorbike;
