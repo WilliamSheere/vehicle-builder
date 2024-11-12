@@ -15,6 +15,10 @@ class Wheel {
     return this.diameter;
   }
 
+  set updateDiameter(newDiameter: number) {
+    this.diameter = newDiameter;
+  }
+
   // Setter method for the diameter property
   get getTireBrand(): string {
     return this.tireBrand;
@@ -23,3 +27,5 @@ class Wheel {
 
 // Export the Wheel class
 export default Wheel;
+
+

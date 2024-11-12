@@ -1,6 +1,6 @@
-// Assuming the Vehicle class and AbleToTow interface are defined elsewhere.
-
 import Motorbike from "./Motorbike";
+import Car from "./Car";
+import Wheel from "./Wheel";
 
 interface AbleToTow {
 	tow(vehicle: Truck | Motorbike | Car): void;
@@ -47,14 +47,15 @@ class Vehicle {
 	}
 }
 
+/*
 class Wheel {
-	// Assuming the Wheel class has some properties
 	diameter: number;
 
 	constructor(diameter: number) {
 		this.diameter = diameter;
 	}
 }
+	*/
 
 class Truck extends Vehicle implements AbleToTow {
 	towingCapacity: number;
@@ -103,7 +104,7 @@ class Truck extends Vehicle implements AbleToTow {
 	}
 
 	// Override the printDetails method from the Vehicle class
-	printDetails(): void {
+	override printDetails(): void {
 		// Call the parent class's printDetails method
 		super.printDetails();
 
@@ -111,7 +112,7 @@ class Truck extends Vehicle implements AbleToTow {
 		console.log(`Towing Capacity: ${this.towingCapacity}`);
 		console.log(
 			`Wheels: ${this.wheels
-				.map((wheel) => `Diameter: ${wheel.diameter}`)
+				.map((wheel) => `Diameter: ${wheel.getDiameter}`)
 				.join(", ")}`
 		);
 	}

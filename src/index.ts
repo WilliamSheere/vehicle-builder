@@ -1,56 +1,50 @@
-// Importing the Vehicle and Wheel classes
-import Vehicle from "./Vehicle.js";
-import Wheel from "./Wheel.js";
+// Import the necessary classes
+import Truck from "./classes/Truck";
+import Motorbike from "./classes/Motorbike";
+import Car from "./classes/Car";
+import Wheel from "./classes/Wheel";
 
-class Motorbike extends Vehicle {
-	// Declare properties of the Motorbike class
-	vin: string;
-	color: string;
-	make: string;
-	model: string;
-	year: number;
-	weight: number;
-	topSpeed: number;
-	wheels: Wheel[];
+// Create a new Truck
+const myTruck = new Truck(
+	"1A2B3C4D5E6F",
+	"Red",
+	"Ford",
+	"F-150",
+	2024,
+	5000,
+	120,
+	[new Wheel(18), new Wheel(18), new Wheel(18), new Wheel(18)],
+	8000
+);
 
-	// Constructor that accepts the properties of the Motorbike class
-	constructor(
-		vin: string,
-		color: string,
-		make: string,
-		model: string,
-		year: number,
-		weight: number,
-		topSpeed: number,
-		wheels: Wheel[]
-	) {
-		// Call the parent class constructor (Vehicle)
-		super(vin, color, make, model, year, weight, topSpeed, wheels);
 
-		// Ensure there are exactly 2 wheels, create new Wheel objects if necessary
-		if (wheels.length !== 2) {
-			this.wheels = [new Wheel(17), new Wheel(17)]; // Default wheels with diameter 17
-		}
-	}
+// Create a Motorbike and a Car
+const myMotorbike = new Motorbike(
+	"2X3Y4Z5A6B7C",
+	"Blue",
+	"Yamaha",
+	"YZF-R3",
+	2022,
+	350,
+	180,
+	[new Wheel(15), new Wheel(15)],
+	//300
+);
+const myCar = new Car(
+	"3Y4Z5A6B7C8D",
+	"Black",
+	"Toyota",
+	"Corolla",
+	2023,
+	1500,
+	180,
+	[new Wheel(16), new Wheel(16), new Wheel(16), new Wheel(16)],
+	//1000
+);
 
-	// Implement the wheelie method
-	wheelie(): void {
-		console.log(`${this.make} ${this.model} is doing a wheelie!`);
-	}
+// Test towing functionality
+myTruck.tow(myMotorbike); // This should be towed because the weight is within the capacity
+myTruck.tow(myCar); // This should not be towed because the weight exceeds the towing capacity
 
-	// Override the printDetails method from the Vehicle class
-	printDetails(): void {
-		// Call the parent class's printDetails method to log common vehicle details
-		super.printDetails();
-
-		// Log the motorbike-specific details
-		console.log(
-			`Wheels: ${this.wheels
-				.map((wheel) => `Diameter: ${wheel.diameter}`)
-				.join(", ")}`
-		);
-	}
-}
-
-// Export the Motorbike class as the default export
-export default Motorbike;
+// Print truck details
+myTruck.printDetails();
