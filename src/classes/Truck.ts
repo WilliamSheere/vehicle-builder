@@ -1,12 +1,11 @@
-import Motorbike from "./Motorbike";
-import Car from "./Car";
-import Wheel from "./Wheel";
+import Motorbike from "./Motorbike.js";
+import Car from "./Car.js";
+import Wheel from "./Wheel.js";
+import AbleToTow from "../interfaces/AbleToTow.js";
+import Vehicle from "./Vehicle.js";
 
-interface AbleToTow {
-	tow(vehicle: Truck | Motorbike | Car): void;
-}
 
-class Vehicle {
+class Truck extends Vehicle implements AbleToTow {
 	vin: string;
 	color: string;
 	make: string;
@@ -15,50 +14,7 @@ class Vehicle {
 	weight: number;
 	topSpeed: number;
 	wheels: Wheel[];
-
-	constructor(
-		vin: string,
-		color: string,
-		make: string,
-		model: string,
-		year: number,
-		weight: number,
-		topSpeed: number,
-		wheels: Wheel[]
-	) {
-		this.vin = vin;
-		this.color = color;
-		this.make = make;
-		this.model = model;
-		this.year = year;
-		this.weight = weight;
-		this.topSpeed = topSpeed;
-		this.wheels = wheels;
-	}
-
-	printDetails(): void {
-		console.log(`VIN: ${this.vin}`);
-		console.log(`Make: ${this.make}`);
-		console.log(`Model: ${this.model}`);
-		console.log(`Year: ${this.year}`);
-		console.log(`Weight: ${this.weight}`);
-		console.log(`Top Speed: ${this.topSpeed}`);
-		console.log(`Color: ${this.color}`);
-	}
-}
-
-/*
-class Wheel {
-	diameter: number;
-
-	constructor(diameter: number) {
-		this.diameter = diameter;
-	}
-}
-	*/
-
-class Truck extends Vehicle implements AbleToTow {
-	towingCapacity: number;
+	towingCapacity: number
 
 	constructor(
 		vin: string,
@@ -72,16 +28,26 @@ class Truck extends Vehicle implements AbleToTow {
 		towingCapacity: number
 	) {
 		// Call the parent Vehicle constructor
-		super(vin, color, make, model, year, weight, topSpeed, wheels);
+		super();
+		this.vin = vin;
+		this.color = color;
+		this.make = make;
+		this.model = model;
+		this.year = year;
+		this.weight = weight;
+		this.topSpeed = topSpeed;
 
 		// Ensure there are 4 wheels, create new Wheel objects if necessary
 		if (wheels.length !== 4) {
 			this.wheels = [
-				new Wheel(18),
-				new Wheel(18),
-				new Wheel(18),
-				new Wheel(18),
+				new Wheel(),
+				new Wheel(),
+				new Wheel(),
+				new Wheel(),
 			];
+		}
+		else{
+			this.wheels=wheels
 		}
 
 		// Set the truck's towing capacity

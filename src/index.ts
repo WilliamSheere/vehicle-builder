@@ -1,9 +1,11 @@
 // Import the necessary classes
-import Truck from "./classes/Truck";
-import Motorbike from "./classes/Motorbike";
-import Car from "./classes/Car";
-import Wheel from "./classes/Wheel";
+import Truck from "./classes/Truck.js";
+import Motorbike from "./classes/Motorbike.js";
+import Car from "./classes/Car.js";
+import Wheel from "./classes/Wheel.js";
+import Cli from "./classes/Cli.js";
 
+const vehicles = [];
 // Create a new Truck
 const myTruck = new Truck(
 	"1A2B3C4D5E6F",
@@ -13,7 +15,7 @@ const myTruck = new Truck(
 	2024,
 	5000,
 	120,
-	[new Wheel(18), new Wheel(18), new Wheel(18), new Wheel(18)],
+	[],
 	8000
 );
 
@@ -43,8 +45,19 @@ const myCar = new Car(
 );
 
 // Test towing functionality
-myTruck.tow(myMotorbike); // This should be towed because the weight is within the capacity
-myTruck.tow(myCar); // This should not be towed because the weight exceeds the towing capacity
+// myTruck.tow(myMotorbike); // This should be towed because the weight is within the capacity
+// myTruck.tow(myCar); // This should not be towed because the weight exceeds the towing capacity
 
-// Print truck details
-myTruck.printDetails();
+// // Print truck details
+// myTruck.printDetails();
+
+vehicles.push(myTruck);
+vehicles.push(myCar);
+// TODO: uncomment once motorbikes are implemented
+vehicles.push(myMotorbike);
+
+// create a new instance of the Cli class
+const cli = new Cli(vehicles);
+
+// start the cli
+cli.startCli();
